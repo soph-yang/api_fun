@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>JSON Set List</title>
+    	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <script>
+            function loadData() {
+                // Step 1: Make instance of request object to make HTTP request after page is loaded
+                var request = new XMLHttpRequest();
+                
+                // Step 2: Set the URL for the AJAX request to be the JSON file
+                request.open("GET", "https://binaryjazz.us/wp-json/genrenator/v1/genre/", true);
+
+			    // Step 3: set up event handler/callback
+                request.onreadystatechange = function() {
+                    if ((request.readyState == 4) && (request.status == 200)) {
+                        // Step 5: wait for done + success
+                        data = request.responseText;
+                        // songjson = JSON.parse(data);
+                        document.getElementById("data").innerHTML = data;
+                    }
+                };
+               
+                // Step 4: fire off the HTTP request
+                request.send();
+            }
+        </script>
     </head>
-    <body>
-        
+    <body onload="loadData()" style="text-align: center">
+        Random music genre: <div id="data">Loading...</div>
     </body>
 </html>
